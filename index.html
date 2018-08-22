@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Tic-Tac-Toe</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Audiowide" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="game" id="game">
+
+      <div v-show="block_move" class="blocker"></div>
+
+      <div id="toggle-menu" :class="{cross: opened}" @click="opened = !opened">
+        <div class="topBar"></div>
+        <div class="middleBar"></div>
+        <div class="bottomBar"></div>
+      </div>
+      <div class="menu" :class="{toggleOn: opened}">
+
+        <span class="label">Mode</span>
+        <select class="opt" name="" id="" v-model="ai" v-on:change="restart()">
+          <option :value=true selected="selected">1 player</option>
+          <option :value=false>2 player</option>
+        </select>
+        <div v-show="ai">
+          <span class="label">Player sign</span>
+          <select class="opt" name="" id="" v-model="ai_sign" v-on:change="restart()">
+            <option value="o" selected="selected">X</option>
+            <option value="x">O</option>
+          </select>
+          <br>
+          <span class="label">Difficulty</span>
+          <select class="opt" name="" id="" v-model="difficulty" v-on:change="restart()">
+            <option value=0 selected="selected">Easy</option>
+            <option value=1>Medium</option>
+            <option value=2>Hard</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="current">
+        current
+        <br>
+        <img v-show="current == 'o'" src="img/O.png" alt="" class="mini">
+        <img v-show="current == 'x'" src="img/X.png" alt="" class="mini">
+      </div>
+
+      <div class="pools">
+        <div class="pool" v-for="(pool, index) in status" @click="move(index)">
+          <img v-show="status[index] == 'x'" src="img/X.png" alt="" class="ox">
+          <img v-show="status[index] == 'o'" src="img/O.png" alt="" class="ox">
+        </div>
+      </div>
+
+      <button @click="restart()" class="reset">{{reset}}</button>
+
+      <footer>&copy; 2018 by Łukasz Dyszy.</footer>
+
+    </div>
+
+  </div>
+
+  <script src="js/vue.min.js"></script>
+  <script src="js/script.js"></script>
+
+</body>
+</html>
